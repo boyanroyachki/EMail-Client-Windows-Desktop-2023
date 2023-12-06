@@ -32,14 +32,15 @@
 
                 <Grid>
                     <StackPanel>
-                        <TextBlock Text="World leader&#x0a;in global finance"
+                        <TextBlock Text="Log in"
                                 Foreground="White"
                                 FontSize="28"
-                                Margin="20,10,10,0"
+                                Margin="20,10,10,10"
                                 TextAlignment="Center"/>
 
                         <Label Content="Email"
                                Foreground="White"
+                               FontSize="20"
                                HorizontalAlignment="Center"/>
 
                         <TextBox Width="150"
@@ -47,16 +48,63 @@
 
                         <Label Content="Password"
                                Foreground="White"
+                               FontSize="20"
                                HorizontalAlignment="Center"/>
 
                         <PasswordBox Width="150"
                                  Name="userPassword"/>
 
-                        <Button Name="loginButton"
+                        <!--<Button Name="loginButton"
                                 Content="Login"
-                                Width="50"
-                                Height="25"
-                                Margin="10" Click="loginButton_Click"/>
+                                FontSize="20"
+                                Width="55"
+                                Height="35"
+                                Margin="10"
+                                Click="loginButton_Click"/>-->
+
+
+
+                        <Button Name="loginButton"
+                                        Content="Login"
+                                        FontSize="20"
+                                        Width="120"  
+                                        Height="35"
+                                        Margin="10"
+                                        Click="loginButton_Click">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <!-- Normal state -->
+                                    <Setter Property="Background" Value="#902ba2"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="BorderBrush" Value="#902ba2"/>
+                                    <Setter Property="BorderThickness" Value="1"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="5">
+                                                    <ContentPresenter HorizontalAlignment="Center"
+                                                                      VerticalAlignment="Center"
+                                                                      Content="{TemplateBinding Content}"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <!-- Hover state -->
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#45a049"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
 
                     </StackPanel>
                 </Grid>

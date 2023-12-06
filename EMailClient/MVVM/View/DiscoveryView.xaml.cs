@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using MailKit.Net.Imap;
+using MailKit.Net.Smtp;
+using MimeKit;
+
 
 namespace EMailClient.MVVM.View
 {
@@ -30,6 +22,45 @@ namespace EMailClient.MVVM.View
         {
             string userEmail = userEmailInput.Text;
             string userPass = userPassword.Password;
+            string emailTo = "elena.peynovska@gmail.com";
+            string topic = "Posleden test obeshtavam";
+            string message = "pravq oshte testove, lov you<3";
+
+            try
+            {
+                SendEmail(userEmail, userPass, emailTo, topic, message);
+                MessageBox.Show("Message sent");
+                //send
+
+            }
+            catch (Exception ex)
+            {
+               MessageBox.Show(ex.Message);
+            }
+
+
+        }
+        void SendEmail(string fromEmail, string password, string toEmail, string subject, string message)
+        {
+            var emailMessage = new MimeMessage();
+
+            emailMessage.From.Add(new MailboxAddress("", fromEmail));
+            emailMessage.To.Add(new MailboxAddress("", toEmail));
+
+            emailMessage.Subject = subject;
+            emailMessage.Body = new TextPart("plain") { Text = message };
+
+            var client = new SmtpClient();
+            
+            client.Connect("smtp.gmail.com", 465, true);
+            
+
+            //add other types
+
+            client.Authenticate(fromEmail, password);
+            client.Send(emailMessage);
+            client.Disconnect(true);
         }
     }
+
 }
